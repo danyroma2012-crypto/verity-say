@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang=it>
+    <head>
+        <title>veritysaysite.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+    </head>
+    <style>
+        body {
+            background: linear-gradient(135deg, #2d0acb 0%, #700edf 50%, #0353f2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: "Comic Sans MS", "Chalkboard SE", ui-rounded, cursive, sans-serif;
+        }
+        .title {
+            text-align: center;
+            color: #ffffff;
+            margin-top: 2cm;
+            font-size: 2cm;
+            animation: ingresso-titolo 1s ease-out both;
+        }
+        .txt {
+            text-align: center;
+            color: #ffffff;
+            margin: 2cm;
+            font-size: 1cm;
+            animation: ingresso-testo 2s ease-out both;
+        }
+        @keyframes ingresso-titolo {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes ingresso-testo {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .btn {
+            display: block;
+            margin: 0 auto;
+            padding: 14px 28px;
+            font-size: 1cm;
+            background: linear-gradient(135deg, #700edf 0%, #0353f2 100%);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(20, 20, 80, 0.35);
+            cursor: pointer;
+            animation: ingresso-bottone 2s ease-out both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #0353f2 0%, #700edf 100%);
+            transform: scale(1.12);
+            box-shadow: 0 12px 28px rgba(20, 20, 80, 0.55);
+        }
+        .btn:active {
+            transform: scale(1.05);
+        }
+        @keyframes ingresso-bottone {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .title,
+            .txt,
+            .btn {
+                animation: none;
+            }
+        }
+        .btn.hidden {
+            display: none;
+        }
+        #reset-btn {
+            margin-top: 20px;
+            font-size: 0.6cm;
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            body {
+                min-height: 100dvh;
+            }
+            .title {
+                margin: 1.5cm 20px 0.8cm;
+                font-size: clamp(56px, 8vw, 76px);
+            }
+            .txt {
+                width: min(82%, 760px);
+                margin: 0.8cm auto;
+                font-size: clamp(28px, 3.2vw, 38px);
+                line-height: 1.35;
+            }
+            .btn {
+                width: min(78%, 620px);
+                min-height: 74px;
+                padding: 16px 32px;
+                font-size: clamp(28px, 3vw, 36px);
+            }
+            #reset-btn {
+                margin-top: 16px;
+                font-size: clamp(24px, 2.8vw, 32px);
+            }
+        }
+        @media (pointer: coarse) {
+            .btn:hover {
+                transform: none;
+            }
+        }
+        @media (orientation: portrait) and (min-width: 768px) and (max-width: 834px) {
+            .txt {
+                width: 78%;
+            }
+        }
+        @media (orientation: landscape) and (min-width: 1024px) {
+            .title {
+                margin-top: 1cm;
+            }
+            .txt {
+                margin: 0.5cm auto;
+            }
+        }
+    </style>
+    <body>
+        <h1 class="title">Verity Say...</h1>
+        <p class="txt">Benvenuto su "Verity say...", fai una domanda a Verity ad alta voce in cui potrà risponderti si, no, probabile, non probabile. Per ottenere una risposta clicca il tasto sottostante e comparirà la risposta alla tua domanda.</p>
+        <button class="btn" id="answer-btn" onclick="getAnswer()">Clicca qui per ottenere una risposta</button>
+        <p class="txt" id="answer"></p>
+        <button class="btn hidden" id="reset-btn" onclick="resetAnswer()">Rifai un'altra domanda!</button>
+        <script>
+            function getAnswer() {
+                const answers = ["Sì", "No", "Probabile", "Non probabile"];
+                const randomIndex = Math.floor(Math.random() * answers.length);
+                const answer = answers[randomIndex];
+                document.getElementById("answer").textContent = answer;
+                document.getElementById("answer-btn").classList.add("hidden");
+                document.getElementById("reset-btn").classList.remove("hidden");
+            }
+
+            function resetAnswer() {
+                document.getElementById("answer").textContent = "";
+                document.getElementById("answer-btn").classList.remove("hidden");
+                document.getElementById("reset-btn").classList.add("hidden");
+            }
+        </script>
+    </body>
+</html>
